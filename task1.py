@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 def task1():
     def f(x):
-        return 1 + np.exp(x) - 2/x
+        return (0.5)**x + 1 - (x - 2)**2
 
 
     x = np.linspace(0, 4, 400)
