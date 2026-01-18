@@ -5,12 +5,12 @@ def task1():
     def f(x):
         return 1 + np.exp(x) - 2/x
 
-
-    x = np.linspace(0, 4, 400)
+    # График: исключаем x = 0
+    x = np.linspace(0.1, 4, 400)
     y = f(x)
 
     plt.figure()
-    plt.axhline(0)          # ось X
+    plt.axhline(0)
     plt.plot(x, y)
     plt.grid()
     plt.xlabel("x")
@@ -18,10 +18,10 @@ def task1():
     plt.title("График функции f(x)")
     plt.show()
 
-
-    a = 0.0       
-    b = 1.0       
-    eps = 0.001   
+    # Интервал отделения корня
+    a = 0.5
+    b = 1.0
+    eps = 0.001
 
     iteration = 0
 
@@ -39,4 +39,4 @@ def task1():
 
     print("Метод половинного деления")
     print("Количество итераций:", iteration)
-    print("Приближённый корень:", root)
+    print(f"Приближённый корень: {root:.4f}")

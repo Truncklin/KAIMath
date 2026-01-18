@@ -1,37 +1,37 @@
-import numpy as np
-
 def task3():
     def f(x):
-        return x**3 - 12*x + 4
+        return 2*x**4 - x**2 - 10
 
-    def chord_method(x0, x1, eps=0.001):
-        iteration = 0
+    # -------- Метод хорд --------
+    def chord(x0, x1, eps=0.001):
+        it = 0
         while abs(x1 - x0) > eps:
             x_new = x1 - f(x1)*(x1 - x0)/(f(x1)-f(x0))
             x0, x1 = x1, x_new
-            iteration += 1
-        return x1, iteration
+            it += 1
+        return x1, it
 
-    def false_position(xa, xb, eps=0.001):
-        iteration = 0
+    # -------- Метод ложного положения --------
+    def false_position(a, b, eps=0.001):
+        it = 0
         while True:
-            xr = xb - f(xb)*(xb - xa)/(f(xb)-f(xa))
-            iteration += 1
-            if abs(f(xr)) < eps:
-                return xr, iteration
-            if f(xr)*f(xa) < 0:
-                xb = xr
+            x = b - f(b)*(b - a)/(f(b)-f(a))
+            it += 1
+            if abs(f(x)) < eps:
+                return x, it
+            if f(a)*f(x) < 0:
+                b = x
             else:
-                xa = xr
+                a = x
 
-    intervals = [(-4, -3), (0, 1), (3, 4)]
+    intervals = [(-3, -2), (2, 3)]
 
     print("Метод хорд:")
-    for x0, x1 in intervals:
-        root, it = chord_method(x0, x1)
-        print(f"Корень в интервале [{x0},{x1}] -> {root:.4f}, итераций = {it}")
+    for a, b in intervals:
+        r, it = chord(a, b)
+        print(f"[{a}, {b}] → x = {r:.4f}, итераций = {it}")
 
     print("\nМетод ложного положения:")
-    for xa, xb in intervals:
-        root, it = false_position(xa, xb)
-        print(f"Корень в интервале [{xa},{xb}] -> {root:.4f}, итераций = {it}")
+    for a, b in intervals:
+        r, it = false_position(a, b)
+        print(f"[{a}, {b}] → x = {r:.4f}, итераций = {it}")

@@ -1,38 +1,46 @@
 def task2():
     def f(x):
-        return x**3 - 6*x - 8
+        return 2*x**3 - 9*x**2 - 3*x + 2
 
     def df(x):
-        return 3*x**2 - 6
+        return 6*x**2 - 18*x - 3
 
-    def newton(x0, eps=0.001):
+    # -------- Метод касательных --------
+    def tangent(x0, eps=0.001):
         x = x0
-        iteration = 0
+        it = 0
         while True:
             x_new = x - f(x)/df(x)
-            iteration += 1
+            it += 1
             if abs(x_new - x) < eps:
-                break
+                return x_new, it
             x = x_new
-        return x_new, iteration
 
+    # -------- Метод простых итераций --------
     def simple_iter(x0, eps=0.001):
         x = x0
-        iteration = 0
+        it = 0
         while True:
-            x_new = (6*x + 8)**(1/3)
-            iteration += 1
+            x_new = (9*x**2 + 3*x - 2)/(2*x**2)
+            it += 1
             if abs(x_new - x) < eps:
-                break
+                return x_new, it
             x = x_new
-        return x_new, iteration
 
-    x0 = 2.5
-    root_newton, it_newton = newton(x0)
-    root_iter, it_iter = simple_iter(x0)
+    # ====== Первый корень ======
+    x0_1 = 0.3
+    r1_t, it1_t = tangent(x0_1)
+    r1_i, it1_i = simple_iter(x0_1)
 
-    print("Метод Ньютона:")
-    print(f"Корень = {root_newton:.4f}, итераций = {it_newton}")
+    # ====== Второй корень ======
+    x0_2 = 5.0
+    r2_t, it2_t = tangent(x0_2)
+    r2_i, it2_i = simple_iter(x0_2)
 
-    print("Метод простых итераций:")
-    print(f"Корень = {root_iter:.4f}, итераций = {it_iter}")
+    print("Первый корень:")
+    print(f"Метод касательных: x = {r1_t:.4f}, итераций = {it1_t}")
+    print(f"Метод простых итераций: x = {r1_i:.4f}, итераций = {it1_i}")
+
+    print("\nВторой корень:")
+    print(f"Метод касательных: x = {r2_t:.4f}, итераций = {it2_t}")
+    print(f"Метод простых итераций: x = {r2_i:.4f}, итераций = {it2_i}")
