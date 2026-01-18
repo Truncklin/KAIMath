@@ -1,6 +1,7 @@
 from task1 import task1
 from task2 import task2
 from task3 import task3
+from task2_1 import task2_1
 
 def main():
     print("Выберите задание (1-3):")
@@ -16,6 +17,10 @@ def main():
         task2()
     elif choice == "3":
         task3()
+    elif choice == "4":
+        task2_1()
+    elif choice == "5":
+        task2_1()
     else:
         print("Неверный выбор. Введите число от 1 до 3.")
 
